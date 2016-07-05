@@ -1,0 +1,21 @@
+#!/bin/bash
+
+MIN_VOLTAGE=3600
+MAX_VOLTAGE=4202
+
+battery_status() {
+  charging=$(cat /usr/lib/pocketchip-batt/charging)
+  voltage=$(cat /usr/lib/pocketchip-batt/voltage)
+  voltage_offset=$((voltage - MIN_VOLTAGE))
+  voltage_range=$((MAX_VOLTAGE - MIN_VOLTAGE))
+  percent=$((voltage_offset * 100 / voltage_range))
+  printf "B: %02d%%" "$percent"
+  if [ "$charging" -gt 0 ]; then
+    echo -n " [CHARGING]"
+  fi
+}
+
+i3status -c ~/.i3/status | while read line; do
+  batt=$(battery_status)
+  echo "$batt | $line"
+done

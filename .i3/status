@@ -1,0 +1,18 @@
+general {
+  colors = true
+  interval = 30
+}
+
+wireless wlan0 {
+  format_up = "W: %essid"
+  format_down = "W: down"
+}
+
+time {
+  format = "%Y-%m-%d %H:%M"
+}
+
+order += "wireless wlan0"
+order += "time"
+# TODO: battery
+
