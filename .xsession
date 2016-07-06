@@ -1,2 +1,3 @@
+xmodmap ~/.Xmodmap
 i3
 
